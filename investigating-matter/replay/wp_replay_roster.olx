@@ -1,0 +1,58 @@
+<!-- wp_replay_roster.olx — the roster strip: where each child in the replay
+     stands right now. Moved here from wp_replay_meters.olx at the October 27
+     review, so it can be shown twice (Five hands and The pile) instead of on
+     every episode; see the note in wp_replay_meters.olx. The conditions come
+     from the macro table at the head of that file. -->
+<!-- Roster strip. One <Markdown when="STATE…"> line per child status, exactly
+     one true per child at any time. The writer of notes/replay/ep-end.md owns
+     the wording and supplies the lines that go here; the macro table above is
+     the source of truth for the conditions. -->
+<Vertical id="wp_roster_strip">
+<Markdown id="wp_roster_h">**Where each child stands right now**</Markdown>
+<Markdown id="wp_roster_01" when="@wp_ra2.value === 'press_again' &amp;&amp; @wp_rh1.value === 'volunteer'">**Marcus** · owns the room</Markdown>
+<Markdown id="wp_roster_02" when="(@wp_ra2.value === 'press_again') &amp;&amp; !(@wp_ra2.value === 'press_again' &amp;&amp; @wp_rh1.value === 'volunteer')">**Marcus** · first hand, every time</Markdown>
+<Markdown id="wp_roster_03" when="@wp_ra2.value === 'chart'">**Marcus** · on the wall, wrong</Markdown>
+<Markdown id="wp_roster_04" when="@wp_ra2.value === 'to_aaliyah'">**Marcus** · handed to Aaliyah</Markdown>
+<Markdown id="wp_roster_05" when="(@wp_ra1.value === 'press') &amp;&amp; !(@wp_ra2.value === 'press_again') &amp;&amp; !(@wp_ra2.value === 'chart') &amp;&amp; !(@wp_ra2.value === 'to_aaliyah')">**Marcus** · pressed</Markdown>
+<Markdown id="wp_roster_06" when="@wp_ra1.value === 'widen'">**Marcus** · the door</Markdown>
+<Markdown id="wp_roster_07" when="@wp_ra1.value === 'praise_next'">**Marcus** · praised, nothing written</Markdown>
+<Markdown id="wp_roster_08" when="@wp_ra1.value === 'thank_next'">**Marcus** · thanked</Markdown>
+<Markdown id="wp_roster_09" when="!(@wp_ra1.value === 'praise_next') &amp;&amp; !(@wp_ra1.value === 'press') &amp;&amp; !(@wp_ra1.value === 'widen') &amp;&amp; !(@wp_ra1.value === 'thank_next')">**Marcus** · hand up</Markdown>
+<Markdown id="wp_roster_10" when="@wp_rb1.value === 'redirect'">**Aaliyah** · out</Markdown>
+<Markdown id="wp_roster_11" when="@wp_rb1.value === 'park'">**Aaliyah** · on the chart</Markdown>
+<Markdown id="wp_roster_12" when="@wp_rb2.value === 'name_it'">**Aaliyah** · in, named</Markdown>
+<Markdown id="wp_roster_13" when="@wp_rb2.value === 'press_science'">**Aaliyah** · in, early; Lesson 3 spent</Markdown>
+<Markdown id="wp_roster_14" when="@wp_rb3.value === 'bridge'">**Aaliyah** · in, and the room with her</Markdown>
+<Markdown id="wp_roster_15" when="@wp_rb3.value === 'run'">**Aaliyah** · in; the room ran</Markdown>
+<Markdown id="wp_roster_16" when="@wp_rb3.value === 'cut'">**Aaliyah** · in; the room cut off</Markdown>
+<Markdown id="wp_roster_17" when="(@wp_rb2.value === 'ask_room') &amp;&amp; !(@wp_rb3.value === 'bridge') &amp;&amp; !(@wp_rb3.value === 'run') &amp;&amp; !(@wp_rb3.value === 'cut')">**Aaliyah** · the room, asked</Markdown>
+<Markdown id="wp_roster_18" when="(@wp_rb1.value === 'take_up') &amp;&amp; !(@wp_rb2.value === 'name_it') &amp;&amp; !(@wp_rb2.value === 'press_science') &amp;&amp; !(@wp_rb2.value === 'ask_room')">**Aaliyah** · saying more</Markdown>
+<Markdown id="wp_roster_19" when="!(@wp_rb1.value === 'redirect') &amp;&amp; !(@wp_rb1.value === 'park') &amp;&amp; !(@wp_rb1.value === 'take_up')">**Aaliyah** · hand up</Markdown>
+<Markdown id="wp_roster_20" when="@wp_rc1.value === 'hold'">**Bri** · held, with an address</Markdown>
+<Markdown id="wp_roster_21" when="@wp_rc1.value === 'answer'">**Bri** · answered</Markdown>
+<Markdown id="wp_roster_22" when="@wp_rc1.value === 'hand_to_room'">**Bri** · in; the room has her question</Markdown>
+<Markdown id="wp_roster_23" when="(@wp_rb2.value === 'press_science') &amp;&amp; !(@wp_rc1.value === 'hold') &amp;&amp; !(@wp_rc1.value === 'answer') &amp;&amp; !(@wp_rc1.value === 'hand_to_room')">**Bri** · in, early</Markdown>
+<Markdown id="wp_roster_24" when="(@wp_rb3.value === 'bridge') &amp;&amp; !(@wp_rc1.value === 'hold') &amp;&amp; !(@wp_rc1.value === 'answer') &amp;&amp; !(@wp_rc1.value === 'hand_to_room')">**Bri** · in, on the bridge</Markdown>
+<Markdown id="wp_roster_25" when="(@wp_rb1.value === 'redirect') &amp;&amp; !(@wp_rc1.value === 'hold') &amp;&amp; !(@wp_rc1.value === 'answer') &amp;&amp; !(@wp_rc1.value === 'hand_to_room')">**Bri** · quieter</Markdown>
+<Markdown id="wp_roster_26" when="(@wp_rb1.value === 'park') &amp;&amp; !(@wp_rc1.value === 'hold') &amp;&amp; !(@wp_rc1.value === 'answer') &amp;&amp; !(@wp_rc1.value === 'hand_to_room')">**Bri** · hand all the way up</Markdown>
+<Markdown id="wp_roster_27" when="!(@wp_rc1.value === 'hold') &amp;&amp; !(@wp_rc1.value === 'answer') &amp;&amp; !(@wp_rc1.value === 'hand_to_room') &amp;&amp; !(@wp_rb2.value === 'press_science') &amp;&amp; !(@wp_rb3.value === 'bridge') &amp;&amp; !(@wp_rb1.value === 'redirect') &amp;&amp; !(@wp_rb1.value === 'park')">**Bri** · hand up</Markdown>
+<Markdown id="wp_roster_28" when="@wp_rh1.value === 'together' || @wp_rh1.value === 'desk_check' || @wp_rh2.value === 'wait' || @wp_rh2.value === 'point'">**Diego** · said it</Markdown>
+<Markdown id="wp_roster_29" when="@wp_rh2.value === 'rescue'">**Diego** · passed over</Markdown>
+<Markdown id="wp_roster_30" when="(@wp_rh1.value === 'cold_call') &amp;&amp; !(@wp_rh1.value === 'together' || @wp_rh1.value === 'desk_check' || @wp_rh2.value === 'wait' || @wp_rh2.value === 'point') &amp;&amp; !(@wp_rh2.value === 'rescue')">**Diego** · looking down</Markdown>
+<Markdown id="wp_roster_31" when="@wp_rh1.value === 'volunteer'">**Diego** · not asked</Markdown>
+<Markdown id="wp_roster_32" when="(@wp_rc2.value === 'ask_diego') &amp;&amp; !(@wp_rh1.value === 'cold_call') &amp;&amp; !(@wp_rh1.value === 'volunteer') &amp;&amp; !(@wp_rh1.value === 'together' || @wp_rh1.value === 'desk_check' || @wp_rh2.value === 'wait' || @wp_rh2.value === 'point')">**Diego** · pointed</Markdown>
+<Markdown id="wp_roster_33" when="(@wp_rc1.value === 'hand_to_room') &amp;&amp; !(@wp_rc2.value === 'ask_diego') &amp;&amp; !(@wp_rh1.value === 'cold_call') &amp;&amp; !(@wp_rh1.value === 'volunteer') &amp;&amp; !(@wp_rh1.value === 'together' || @wp_rh1.value === 'desk_check' || @wp_rh2.value === 'wait' || @wp_rh2.value === 'point')">**Diego** · heard, through Espy</Markdown>
+<Markdown id="wp_roster_34" when="!(@wp_rc1.value === 'hand_to_room') &amp;&amp; !(@wp_rh1.value === 'cold_call') &amp;&amp; !(@wp_rh1.value === 'volunteer') &amp;&amp; !(@wp_rh1.value === 'together' || @wp_rh1.value === 'desk_check' || @wp_rh2.value === 'wait' || @wp_rh2.value === 'point')">**Diego** · silent</Markdown>
+<Markdown id="wp_roster_35" when="!(@wp_rd1.value === 'jaylen')">**Jaylen** · hand up, not taken</Markdown>
+<Markdown id="wp_roster_36" when="@wp_re1.value === 'redirect'">**Jaylen** · out</Markdown>
+<Markdown id="wp_roster_37" when="@wp_re1.value === 'park' || @wp_re2.value === 'distinction'">**Jaylen** · on the chart</Markdown>
+<Markdown id="wp_roster_38" when="@wp_re2.value === 'run'">**Jaylen** · ran with it</Markdown>
+<Markdown id="wp_roster_39" when="(@wp_re1.value === 'take_up') &amp;&amp; !(@wp_re1.value === 'park' || @wp_re2.value === 'distinction') &amp;&amp; !(@wp_re2.value === 'run')">**Jaylen** · explaining</Markdown>
+<Markdown id="wp_roster_40" when="(@wp_rd1.value === 'jaylen') &amp;&amp; !(@wp_re1.value === 'redirect') &amp;&amp; !(@wp_re1.value === 'park' || @wp_re2.value === 'distinction') &amp;&amp; !(@wp_re2.value === 'run') &amp;&amp; !(@wp_re1.value === 'take_up')">**Jaylen** · called on</Markdown>
+<Markdown id="wp_roster_41" when="(@wp_ra1.value === 'widen' || @wp_rb2.value === 'ask_room') &amp;&amp; !(@wp_rd2.value === 'keisha')">**Keisha** · hand up since Marcus</Markdown>
+<Markdown id="wp_roster_42" when="!(@wp_ra1.value === 'widen' || @wp_rb2.value === 'ask_room') &amp;&amp; !(@wp_rd2.value === 'keisha')">**Keisha** · hand up, not taken</Markdown>
+<Markdown id="wp_roster_43" when="@wp_rf1.value === 'redirect' || @wp_rf2.value === 'correct'">**Keisha** · out</Markdown>
+<Markdown id="wp_roster_44" when="@wp_rf1.value === 'park' || @wp_rf2.value === 'chart_rule' || @wp_rf2.value === 'ask_ocean'">**Keisha** · on the chart</Markdown>
+<Markdown id="wp_roster_45" when="(@wp_rf1.value === 'take_up') &amp;&amp; !(@wp_rf1.value === 'park' || @wp_rf2.value === 'chart_rule' || @wp_rf2.value === 'ask_ocean') &amp;&amp; !(@wp_rf1.value === 'redirect' || @wp_rf2.value === 'correct')">**Keisha** · built a rule</Markdown>
+<Markdown id="wp_roster_46" when="(@wp_rd2.value === 'keisha') &amp;&amp; !(@wp_rf1.value === 'redirect' || @wp_rf2.value === 'correct') &amp;&amp; !(@wp_rf1.value === 'park' || @wp_rf2.value === 'chart_rule' || @wp_rf2.value === 'ask_ocean') &amp;&amp; !(@wp_rf1.value === 'take_up')">**Keisha** · called on</Markdown>
+</Vertical>

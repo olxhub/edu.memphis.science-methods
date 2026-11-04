@@ -1,0 +1,111 @@
+<!-- wp_replay_meters.olx — the clock and the children meter for the replay.
+
+     Referenced as <Use ref="wp_meters"/> at the top of every episode block
+     (wp_ra … wp_rh, wp_rend). Display mode: both lines draw a computed
+     position and are never written by the learner. sum() skips forks that
+     have not been answered, so both lines start at their baseline and move
+     only as choices are made. Nothing here locks.
+
+     ======================================================================
+     MACRO TABLE — the expression language has no let-bindings, so writers
+     use these names in scripts and builders paste the expression verbatim.
+     Copy from here; do not re-derive. Source of truth: notes/replay/CONTRACT.md.
+
+     In an XML attribute, && must be written as &amp;&amp;. The table below
+     is a comment, so it shows the plain source form.
+
+     ALL_CODES  = @wp_ra1.code, @wp_ra2.code, @wp_rb1.code, @wp_rb2.code,
+                  @wp_rb3.code, @wp_rc1.code, @wp_rc2.code, @wp_rd1.code,
+                  @wp_rd2.code, @wp_re1.code, @wp_re2.code, @wp_rf1.code,
+                  @wp_rf2.code, @wp_rg1.code, @wp_rg2.code, @wp_rg3.code,
+                  @wp_rh1.code, @wp_rh2.code          (eighteen forks)
+
+     MINUTE               Math.floor(10 + sum([ALL_CODES]) / 60)   (interpolate as {{MINUTE}})
+     TICKET_AT            10 + sum([ALL_CODES]) / 60
+     A_PRAISED            @wp_ra1.value === 'praise_next'
+     A_PRESSED            @wp_ra1.value === 'press'
+     A_WIDENED            @wp_ra1.value === 'widen'
+     A_TO_AALIYAH         @wp_ra2.value === 'to_aaliyah'
+     MARCUS_FIRST         @wp_ra2.value === 'press_again'
+     MARCUS_CHARTED_WRONG @wp_ra2.value === 'chart'
+     B_OUT                @wp_rb1.value === 'redirect'
+     B_CHARTED            @wp_rb1.value === 'park'
+     B_IN                 @wp_rb1.value === 'take_up'
+     B_NAMED              @wp_rb2.value === 'name_it'
+     B_PRESSED            @wp_rb2.value === 'press_science'
+     B_ROOM               @wp_rb2.value === 'ask_room'
+     B_BRIDGED            @wp_rb3.value === 'bridge'
+     B_RUN                @wp_rb3.value === 'run'
+     CHART_BIGGER         @wp_rb2.value === 'name_it' || @wp_rb2.value === 'press_science' || @wp_rb3.value === 'bridge'
+     L3_SPENT             @wp_rb2.value === 'press_science' || @wp_rc1.value === 'answer'
+     C_HELD               @wp_rc1.value === 'hold'
+     C_ANSWERED           @wp_rc1.value === 'answer'
+     C_ROOM               @wp_rc1.value === 'hand_to_room'
+     DIEGO_RELAYED        @wp_rc1.value === 'hand_to_room'
+     DIEGO_ASKED          @wp_rc2.value === 'ask_diego'
+     KEISHA_EARLY         @wp_ra1.value === 'widen' || @wp_rb2.value === 'ask_room'
+     E_TAKEN              @wp_rd1.value === 'jaylen'
+     F_TAKEN              @wp_rd2.value === 'keisha'
+     BOTH_TAKEN           @wp_rd1.value === 'jaylen' && @wp_rd2.value === 'keisha'
+     E_OUT                @wp_re1.value === 'redirect'
+     E_CHARTED            @wp_re1.value === 'park' || @wp_re2.value === 'distinction'
+     E_RUN                @wp_re2.value === 'run'
+     F_OUT                @wp_rf1.value === 'redirect' || @wp_rf2.value === 'correct'
+     F_CHARTED            @wp_rf1.value === 'park' || @wp_rf2.value === 'chart_rule' || @wp_rf2.value === 'ask_ocean'
+     F_RULE               @wp_rf1.value === 'take_up'
+     QUIET_COUNT          (@wp_rb1.value === 'redirect' ? 1 : 0) + (@wp_re1.value === 'redirect' ? 1 : 0) + (@wp_rf1.value === 'redirect' ? 1 : 0) + (@wp_rc1.value === 'answer' ? 1 : 0)
+     G_PREDICT            @wp_rg1.value === 'predict'
+     G_WAITED             @wp_rg2.value === 'wait'
+     G_REWROTE            @wp_rg3.value === 'rewrite'
+     H_COLD               @wp_rh1.value === 'cold_call'
+     H_VOLUNTEER          @wp_rh1.value === 'volunteer'
+     MARCUS_OWNS_ROOM     @wp_ra2.value === 'press_again' && @wp_rh1.value === 'volunteer'
+     DIEGO_WORD           @wp_rh1.value === 'together' || @wp_rh1.value === 'desk_check' || @wp_rh2.value === 'wait' || @wp_rh2.value === 'point'
+     DIEGO_PASSED         @wp_rh2.value === 'rescue'
+     PAST_20              10 + sum([ALL_CODES]) / 60 > 20
+     PAST_22              10 + sum([ALL_CODES]) / 60 > 22
+
+     Taken up, defined once (what the children meter counts; praised and used
+     do not count):
+       Marcus  = MARCUS_FIRST || A_TO_AALIYAH || MARCUS_CHARTED_WRONG || B_BRIDGED
+       Aaliyah = B_CHARTED || B_IN
+       Bri     = C_HELD || C_ROOM || B_PRESSED || B_BRIDGED
+       Diego   = DIEGO_WORD || DIEGO_ASKED
+       Jaylen  = E_CHARTED || E_RUN
+       Keisha  = F_CHARTED || F_RULE
+     ====================================================================== -->
+
+<Vertical id="wp_meters">
+
+<Collapsible id="wp_meters_howto" title="How the replay works">
+<Markdown id="wp_meters_howto_md">
+You're Ms. Boyd, from minute 10. At each fork, pick what you'd actually say. **The clock** moves with every choice (slides planned for 20, exit ticket for 30, bell at 45). **The second bar** counts children whose ideas you've *taken up*: built on, charted, or handed to the class; praise alone doesn't count. Twice, halfway and at the end, **a strip** shows where each child stands. No path takes up every child and still makes the exit ticket, so every choice is a trade.
+</Markdown>
+</Collapsible>
+
+<NumberLineInput id="wp_clock" min="0" max="47" step="0.1" snap="step" display="true"
+                 markerLabel="now"
+                 placeholder="The clock starts when you make a move."
+                 initial="10 + sum([@wp_ra1.code, @wp_ra2.code, @wp_rb1.code, @wp_rb2.code, @wp_rb3.code, @wp_rc1.code, @wp_rc2.code, @wp_rd1.code, @wp_rd2.code, @wp_re1.code, @wp_re2.code, @wp_rf1.code, @wp_rf2.code, @wp_rg1.code, @wp_rg2.code, @wp_rg3.code, @wp_rh1.code, @wp_rh2.code]) / 60">
+  <Tick value="10" label="share-out"   > share-out   </Tick>
+  <Tick value="20" label="slides"      > slides      </Tick>
+  <Tick value="30" label="exit ticket" > exit ticket </Tick>
+  <Tick value="45" label="bell"        > bell        </Tick>
+</NumberLineInput>
+
+<NumberLineInput id="wp_children" min="0" max="6" step="1" snap="step" display="true"
+                 markerLabel="taken up"
+                 initial="Math.min(6, (@wp_ra2.value === 'press_again' || @wp_ra2.value === 'to_aaliyah' || @wp_ra2.value === 'chart' || @wp_rb3.value === 'bridge' ? 1 : 0) + (@wp_rb1.value === 'park' || @wp_rb1.value === 'take_up' ? 1 : 0) + (@wp_rc1.value === 'hold' || @wp_rc1.value === 'hand_to_room' || @wp_rb2.value === 'press_science' || @wp_rb3.value === 'bridge' ? 1 : 0) + (@wp_rh1.value === 'together' || @wp_rh1.value === 'desk_check' || @wp_rh2.value === 'wait' || @wp_rh2.value === 'point' || @wp_rc2.value === 'ask_diego' ? 1 : 0) + (@wp_re1.value === 'park' || @wp_re2.value === 'distinction' || @wp_re2.value === 'run' ? 1 : 0) + (@wp_rf1.value === 'park' || @wp_rf2.value === 'chart_rule' || @wp_rf2.value === 'ask_ocean' || @wp_rf1.value === 'take_up' ? 1 : 0))">
+  <Tick value="0" label="none"    > none    </Tick>
+  <Tick value="6" label="all six" > all six </Tick>
+</NumberLineInput>
+
+<!-- ROSTER STRIP: moved out at the October 27 review ("remove the section on
+     who is participating in which block. Maybe use two instances of the
+     participation pattern"). It used to sit here, under the two bars, on every
+     episode. It now lives, unchanged, in wp_replay_roster.olx and is shown
+     twice: at the top of Five hands (wp_rd, halfway) and of The pile (wp_rend,
+     the end). To put it back on every episode, add <Use ref="wp_roster_strip"/>
+     here and remove those two Uses. -->
+
+</Vertical>

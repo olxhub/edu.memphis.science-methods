@@ -1,0 +1,27 @@
+# Static-site manifest for Ambitious Science Teaching, Unit 1: Investigating
+# Matter — the ELED 3261 (Science Methods for Inclusive Elementary
+# Classrooms) SBA at the University of Memphis.
+#
+#   npm run build   # once, to compile grammars/registries
+#   ./node_modules/.bin/tsx scripts/build-static.ts --manifest <this file>
+#
+# Output lands in dist/wp/. The event websocket is enabled via PMSS
+# (.static { websocket: true; }) at deploy time; the client connects to the
+# same-origin /wsapi/ endpoint. Block ids keep the wp_ prefix from the
+# unit's working title ("Whose Phenomenon?").
+title: "Ambitious Science Teaching · Unit 1: Investigating Matter"
+namespace: wp
+content_root: .
+classes:
+  - no-translanguaging
+content_notice: >
+  Course content Copyright &copy; 2026 by Wesam Salem, Ben Pierce, and
+  Piotr Mitros. Licensed under
+  [AGPLv3](https://www.gnu.org/licenses/agpl-3.0.html); source available at
+  [github.com/olxhub/edu.memphis.science-methods](https://github.com/olxhub/edu.memphis.science-methods/).
+  The classroom, school, teacher, and children in this unit are fictional.
+routes:
+  # "/" lands on the consent gate (wp_study.olx); the unit renders inside it
+  # once the consent question is answered, either way. A deployment outside a
+  # study points "/" at wp/wp_sba_part1 instead.
+  "/": wp/wp_study

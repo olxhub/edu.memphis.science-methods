@@ -1,0 +1,28 @@
+Contributors
+============
+
+Course
+======
+
+The course content was developed by Wesam Salem, Ben Pierce, and Piotr
+Mitros for ELED 3261 at the University of Memphis, drawing on the Ambitious
+Science Teaching framework. Wesam Salem is the course instructor; Ben Pierce
+and Piotr Mitros did most of the authoring and revision, working with
+Anthropic's Claude models, which drafted much of the material under their
+direction and review.
+
+Platform
+========
+
+This module is built with lo-blocks, part of the Learning Observer project,
+originally conceived of and created by Piotr Mitros. See the lo-blocks
+repository (https://github.com/olxhub/lo-blocks/) for full platform
+contributor history.
+
+Copyright
+=========
+
+Everyone who contributed to the course content holds copyright to portions
+of the work, mutually cross-licensed under the AGPL. Broad copyright
+holdership is deliberate: it means many parties independently have standing
+to enforce the license.
